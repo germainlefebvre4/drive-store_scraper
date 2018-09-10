@@ -1,22 +1,31 @@
 # Drive Store Scraper
 
 **Summary**
-1. [Global Application](#global-application)
-   1. [The Workflow](#the-workflow)
+1. [Global View](#global-view)
+   1. [Global application](#global-application)
+   1. [Workflow](#workflow)
 1. [Zoom on the Sraper](#zoom-on-the-scraper)
-   1. [The incomings](#the-outcomings)
-   1. [The outcomings](#the outcomings)
-1. [Dependencies](#context-and-dependencies)
-1. [Run the app](#running-the-scrap)
+   1. [General](#general)
+   1. [Configuration](#configuration)
+1. [Dependencies](#dependencies)
+1. [Run the app](#run-the-app)
+   1. [Quickstart](#quickstart)
+1. [Production eligibility](#production-eligibility)
 
 
-## Global application
+## Global View
 
-### The Workflow
+### Global application
 
-This application is part of a fullchain applications having the goal of providing the best product price from all drive stores registered.
+This application is part of a fullchain applications which have the goal to provide the best product prices from all drive stores for a registered cart.
 
-Global application schema :
+### Workflow
+
+To provide a structured data requestable application a chain of steps is required. This chain catch the raw data and store it in a structured way. This data is thus queryable and optimized for processing.
+
+You can find a quick sight of the Data Journey below.
+
+**Global application schema**
 ```
                                                              Customer  
                                                                  |     
@@ -27,12 +36,13 @@ Global application schema :
        |                                                               
        |                                                               
   Drive Stores                                                         
-+----+                                                                 
-|   +----+                                                             
-+---|   +----+                                                         
-    +---|    |                                                         
-        +----+                                                         
+ +----+                                                                 
+ |   +----+                                                             
+ +---|   +----+                                                         
+     +---|    |                                                         
+         +----+                                                         
 ```
+
 
 Quick description of each step :
 * Scraper : Catches product prices,
@@ -43,11 +53,17 @@ Quick description of each step :
 
 ## Zoom on the Scraper
 
+### General
+
 The aim of the scraper is to periodically retrieve the products informations from drive stores and to store them in the database.
 
 The Scraper will reach and parse the products pages to retrieve prices, product price and product per unit price in order to correlate data to reveal the best amount for the registered cart.
 
 Products prices are stored as documents in a NoSQL Database, here MongoDB, to keep a trace of prices. This will allow to see the trend of product prices and predict them.
+
+### Configuration
+
+All the application configuration is stored in the `conf/` directory.
 
 
 ## Dependencies
@@ -63,7 +79,10 @@ Required python libs :
 
 ## Run the app
 
-Quickstart application
+### Quickstart
+
 ```shell
 scrapy runspider PriceScraper.py
 ```
+
+## Production eligibility
