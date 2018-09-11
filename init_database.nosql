@@ -1,0 +1,12 @@
+use auchan-products
+db.createCollection("products")
+db.createUser({
+	user: "scrapy59",
+	pwd: "scrapy59",
+	roles: [
+		{
+			role: "readWrite",
+			db: "products",
+		}
+	]
+})
