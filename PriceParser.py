@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import datetime
 import re
-import scrapy, requests as Request
+import requests as Request
+import scrapy
 import pymongo
 from pymongo import MongoClient
 
@@ -65,6 +67,7 @@ class ProductsSpider(scrapy.Spider):
 
             # Format data
             mongo_data = {
+                'Date': datetime.datetime.now(),
                 'Company': 'Auchan',
                 'Location': location,
                 'Product': product_name,
@@ -84,11 +87,4 @@ class ProductsSpider(scrapy.Spider):
         db.authenticate("scrapy59", "scrapy59")
         collection = db['products']
 
-        query_filter = product_data.copy()
-        for key in set(product_data.keys()) - set(["Company", "Location", "Product"]):
-            del query_filter[key]
-
-        if collection.find(query_filter).count() > 0:
-            collection.replace_one(query_filter, product_data)
-        else:
-            collection.insert(product_data)
+        collection.insert(product_data)
