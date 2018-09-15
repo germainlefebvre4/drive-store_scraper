@@ -21,6 +21,7 @@ class ProductsSpider(scrapy.Spider):
     ]
     store_search = [
         "https://www.auchandrive.fr/catalog/jardin-bio-pur-jus-de-citron-vert-25cl-P513766",
+        "https://www.auchandrive.fr/catalog/coca-cola-zero-1l-P762493",
     ]
 
     # Class attributes
